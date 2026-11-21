@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://accounts.google.com/gsi/client; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://accounts.google.com/gsi/style; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://accounts.google.com/gsi/ https://cdn.jsdelivr.net https://fonts.googleapis.com https://fonts.gstatic.com; frame-src https://accounts.google.com/gsi/ https://www.youtube-nocookie.com blob:; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="no-referrer">
+<meta name="theme-color" content="#1B1530">
+<meta name="robots" content="noindex">
+<title>Verifikasi Dokumen — Business Banking</title>
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{color-scheme:dark light;--bg:#1B1530;--card:#241C3F;--line:rgba(167,139,250,.16);--tx:#F3F0FF;--mut:#A79FC4;--acc:#7C3AED;--ok:#4ADE80;--bad:#F87171}
+  @media (prefers-color-scheme:light){:root{--bg:#F6F4FB;--card:#FFFFFF;--line:#E4DEF3;--tx:#1B1530;--mut:#5B5478;--ok:#15803D;--bad:#B91C1C}}
+  *{box-sizing:border-box}
+  body{margin:0;min-height:100vh;display:grid;place-items:center;padding:24px 16px;background:var(--bg);color:var(--tx);font:16px/1.5 Inter,system-ui,-apple-system,Segoe UI,sans-serif}
+  main{width:100%;max-width:480px}
+  .brand{display:flex;align-items:center;gap:10px;margin-bottom:16px;color:var(--mut);font-size:14px}
+  .brand img{width:28px;height:28px;border-radius:8px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:24px}
+  h1{font-size:20px;line-height:1.2;margin:0 0 6px}
+  p.sub{margin:0 0 18px;color:var(--mut);font-size:14px}
+  .st{display:flex;align-items:center;gap:10px;font-weight:700;margin-bottom:14px}
+  .st.ok{color:var(--ok)}.st.bad{color:var(--bad)}
+  .dot{width:12px;height:12px;border-radius:50%;background:currentColor;flex:none}
+  table{width:100%;border-collapse:collapse;font-size:14px}
+  th{text-align:left;color:var(--mut);font-weight:500;padding:8px 12px 8px 0;vertical-align:top;width:42%}
+  td{padding:8px 0;word-break:break-word}
+  tr+tr th,tr+tr td{border-top:1px solid var(--line)}
+  form{display:flex;gap:8px;margin-top:18px}
+  label.sr{position:absolute;left:-9999px}
+  input{flex:1;min-width:0;height:48px;padding:0 14px;border-radius:12px;border:1px solid var(--line);background:transparent;color:var(--tx);font:600 16px/1 ui-monospace,Menlo,monospace;letter-spacing:.06em;text-transform:uppercase}
+  input:focus,button:focus-visible{outline:2px solid var(--acc);outline-offset:2px}
+  button{height:48px;padding:0 18px;border-radius:12px;border:0;background:var(--acc);color:#fff;font:600 15px/1 Inter,system-ui,sans-serif;cursor:pointer}
+  button:hover{background:#6D28D9}
+  .spin{width:28px;height:28px;border-radius:50%;border:3px solid var(--line);border-top-color:var(--acc);animation:p 1s linear infinite;margin:8px auto}
+  @keyframes p{to{transform:rotate(360deg)}}
+  @media (prefers-reduced-motion:reduce){.spin{animation:none}}
+  .foot{margin-top:14px;color:var(--mut);font-size:12.5px;text-align:center}
+</style>
+</head>
+<body>
+<main>
+  <div class="brand"><img src="./icon-192.png" alt="" width="28" height="28"><span>Business Banking · Verifikasi dokumen</span></div>
+  <section class="card" aria-live="polite">
+    <h1>Verifikasi keaslian surat</h1>
+    <p class="sub">Pindai QR pada surat atau ketik 20 karakter kode verifikasi yang tercetak di bawah QR.</p>
+    <div id="hasil"></div>
+    <form id="f" autocomplete="off">
+      <label class="sr" for="kode">Kode verifikasi</label>
+      <input id="kode" name="kode" inputmode="text" maxlength="24" placeholder="Kode verifikasi" required>
+      <button type="submit">Periksa</button>
+    </form>
+  </section>
+  <p class="foot">Halaman ini hanya menampilkan data ringkas. Nama nasabah disamarkan sesuai UU No. 27/2022 (PDP).</p>
+</main>
+<script src="./js/config.js"></script>
+<script src="./js/verifikasi.js?v=435e1527"></script>
+</body>
+</html>

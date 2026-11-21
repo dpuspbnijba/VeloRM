@@ -1,0 +1,22 @@
+/* Service worker Business Banking — versi 2.0.0+435e1527
+ * Aset statis: cache-first (instan). API Apps Script: SELALU jaringan (data nasabah tidak pernah di-cache SW). */
+const CACHE = 'bb-435e1527';
+const ASET = ['./', './index.html', './css/app.css?v=435e1527', './js/app.js?v=435e1527', './js/config.js', './verifikasi.html', './js/verifikasi.js', './manifest.json', './icon-192.png', './icon-512.png', './favicon-32.png'];
+self.addEventListener('install', (e) => { e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASET)).then(() => self.skipWaiting())); });
+self.addEventListener('activate', (e) => { e.waitUntil(caches.keys().then((k) => Promise.all(k.filter((x) => x !== CACHE).map((x) => caches.delete(x)))).then(() => self.clients.claim())); });
+self.addEventListener('fetch', (e) => {
+  const u = new URL(e.request.url);
+  if (e.request.method !== 'GET') return;                                    // POST API → langsung jaringan
+  if (/script\.google(usercontent)?\.com$/.test(u.hostname) || u.hostname === 'accounts.google.com') return;
+  if (e.request.mode === 'navigate') { e.respondWith(fetch(e.request).catch(() => caches.match('./index.html'))); return; }
+  if (u.origin === location.origin && /\/config\.js$/.test(u.pathname)) { // config.js: jaringan dulu agar GAS_URL baru langsung terpakai
+    e.respondWith(fetch(e.request).then((res) => { if (res.ok) { const c = res.clone(); caches.open(CACHE).then((x) => x.put(e.request, c)); } return res; }).catch(() => caches.match(e.request))); return;
+  }
+  const runtime = /fonts\.(googleapis|gstatic)\.com$|cdn\.jsdelivr\.net$/.test(u.hostname);
+  if (u.origin === location.origin || runtime) {
+    e.respondWith(caches.match(e.request).then((hit) => hit || fetch(e.request).then((res) => {
+      if (res.ok && (u.origin === location.origin || runtime)) { const c = res.clone(); caches.open(CACHE).then((x) => x.put(e.request, c)); }
+      return res;
+    })));
+  }
+});

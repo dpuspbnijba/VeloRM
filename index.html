@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://cdn.jsdelivr.net https://accounts.google.com/gsi/client; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://accounts.google.com/gsi/style; font-src https://fonts.gstatic.com; img-src 'self' data: blob: https:; connect-src 'self' https://script.google.com https://script.googleusercontent.com https://accounts.google.com/gsi/ https://cdn.jsdelivr.net https://fonts.googleapis.com https://fonts.gstatic.com; frame-src https://accounts.google.com/gsi/ https://www.youtube-nocookie.com blob:; object-src 'none'; base-uri 'self'; form-action 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#1B1530">
+<meta name="description" content="Business Banking — Portfolio Kredit & Monitoring RM">
+<meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><meta name="apple-mobile-web-app-title" content="Business Banking">
+<title>Business Banking</title>
+<link rel="manifest" href="./manifest.json">
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..24,400,0..1,0&display=block" rel="stylesheet">
+<link rel="stylesheet" href="./css/app.css?v=435e1527">
+<script src="./js/config.js"></script>
+</head>
+<body>
+<div id="splash" class="splash" role="status" aria-live="polite">
+  <div class="logo lg"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V10l7-5 7 5v11"/><path d="M9 21v-6h6v6"/></svg></div>
+  <div class="spin"></div>
+  <p>Memuat Business Banking…</p>
+</div>
+
+<section id="auth" class="auth" hidden>
+  <div class="auth-card">
+    <div class="auth-brand">
+      <div class="logo lg"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V10l7-5 7 5v11"/><path d="M9 21v-6h6v6"/></svg></div>
+      <h1 id="auth-title"><span id="auth-appname">Business Banking</span> <span class="bdg acc">Portal Internal</span></h1>
+      <p>Portfolio Kredit &amp; Monitoring Relationship Manager</p>
+    </div>
+    <div class="steps" id="auth-steps"></div>
+    <div id="auth-body" aria-live="polite"></div>
+    <div class="auth-policy">
+      <span class="ms warn s18">policy</span>
+      <div><b class="fs13" style="color:var(--tx)">Kebijakan keamanan</b><br>Login wajib akun Google terdaftar + kode Microsoft Authenticator. Maksimum <b class="bad">5 kali</b> salah kode, lalu akun terkunci 15 menit. Seluruh aktivitas tercatat di log audit.</div>
+    </div>
+  </div>
+  <p class="auth-foot" id="auth-foot">Akses hanya untuk pegawai berwenang. Data nasabah dilindungi UU No. 27 Tahun 2022 tentang Pelindungan Data Pribadi.</p>
+</section>
+
+<div id="app" hidden>
+  <aside id="sb" class="sb" aria-label="Navigasi utama">
+    <div class="sb-brand">
+      <div class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 21h18"/><path d="M5 21V10l7-5 7 5v11"/><path d="M9 21v-6h6v6"/></svg></div>
+      <div class="trunc"><b id="sb-nama">Business Banking</b><small>Portfolio &amp; RM</small></div>
+    </div>
+    <nav id="nav" class="sb-nav"></nav>
+    <div class="sb-foot"><button class="nav-item" data-act="keluar" type="button"><span class="ms">logout</span><span>Keluar</span></button></div>
+  </aside>
+  <div id="scrim" class="scrim" data-act="tutup-sb"></div>
+  <div class="main">
+    <header class="tb">
+      <button class="btn-ic" data-act="menu" type="button" aria-label="Buka atau lipat menu"><span class="ms s22">menu</span></button>
+      <div class="tb-sep"></div>
+      <h1 id="tb-title" class="tb-title">Dashboard</h1>
+      <div class="sp"></div>
+      <label class="cab-pill" id="cab-wrap" hidden><span class="ms s18 acc">account_balance</span><span class="sr">Filter cabang</span><select id="cab-sel"></select></label>
+      <span id="sync" class="sync" title="Status sinkronisasi"><i></i><span>Tersinkron</span></span>
+      <button class="btn-ic" data-act="notif" type="button" aria-label="Notifikasi"><span class="ms">notifications</span><span id="notif-cnt" class="cnt" hidden></span></button>
+      <button class="btn-ic" data-act="tema" type="button" aria-label="Ganti tema terang/gelap"><span class="ms" id="ic-tema">light_mode</span></button>
+      <div class="tb-sep"></div>
+      <button class="tb-user" data-act="akun" type="button" aria-label="Menu akun"><span class="av acc" id="tb-av">BB</span><div><b id="tb-nama">—</b><small id="tb-peran">—</small></div></button>
+    </header>
+    <main id="content" class="content">
+      <section class="view" id="v-dashboard" aria-label="Dashboard"></section>
+      <section class="view" id="v-analisis" aria-label="Analisis"></section>
+      <section class="view" id="v-nasabah" aria-label="Daftar nasabah"></section>
+      <section class="view" id="v-detail" aria-label="Detail nasabah"></section>
+      <section class="view" id="v-achievement" aria-label="Achievement RM"></section>
+      <section class="view" id="v-dokumen" aria-label="Dokumen"></section>
+      <section class="view" id="v-surat" aria-label="Surat"></section>
+      <section class="view" id="v-wa" aria-label="Pesan WA"></section>
+      <section class="view" id="v-pengingat" aria-label="Pengingat"></section>
+      <section class="view" id="v-impor" aria-label="Impor data"></section>
+      <section class="view" id="v-pengaturan" aria-label="Pengaturan"></section>
+    </main>
+  </div>
+</div>
+<div id="layer"></div>
+<div id="toasts" class="toasts" aria-live="polite"></div>
+<div id="tip" class="tip" role="tooltip"></div>
+
+<script src="./js/app.js?v=435e1527" defer></script>
+</body>
+</html>
