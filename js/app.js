@@ -717,7 +717,7 @@ function go(route, params, opsi) {
 }
 function render(route, paksa) {
   const el = $('#v-' + route);
-  if (!el || !R[route]) return;
+  if (!el || !R[route] || !S.me) return; // belum masuk (mis. resize/DevTools di layar login) → jangan render halaman data
   if (paksa || S.dirty[route] || !el.dataset.siap) {
     try { R[route](el, S.params || {}); } catch (e) { console.error(e); el.innerHTML = kosong('error', 'Gagal menampilkan halaman', e.message); }
     el.dataset.siap = '1'; S.dirty[route] = false;

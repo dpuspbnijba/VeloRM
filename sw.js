@@ -1,7 +1,7 @@
-/* Service worker Business Banking — versi 2.0.0+435e1527
+/* Service worker Business Banking — versi 2.0.0+fd805e9e
  * Aset statis: cache-first (instan). API Apps Script: SELALU jaringan (data nasabah tidak pernah di-cache SW). */
-const CACHE = 'bb-435e1527';
-const ASET = ['./', './index.html', './css/app.css?v=435e1527', './js/app.js?v=435e1527', './js/config.js', './verifikasi.html', './js/verifikasi.js', './manifest.json', './icon-192.png', './icon-512.png', './favicon-32.png'];
+const CACHE = 'bb-fd805e9e';
+const ASET = ['./', './index.html', './css/app.css?v=fd805e9e', './js/app.js?v=fd805e9e', './js/config.js', './verifikasi.html', './js/verifikasi.js', './manifest.json', './icon-192.png', './icon-512.png', './favicon-32.png'];
 self.addEventListener('install', (e) => { e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASET)).then(() => self.skipWaiting())); });
 self.addEventListener('activate', (e) => { e.waitUntil(caches.keys().then((k) => Promise.all(k.filter((x) => x !== CACHE).map((x) => caches.delete(x)))).then(() => self.clients.claim())); });
 self.addEventListener('fetch', (e) => {
